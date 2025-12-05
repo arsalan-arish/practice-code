@@ -11,15 +11,14 @@ class atlas:
         p1.mkdir(parents=True, exist_ok=True)
         temp = [n for n in p1.iterdir()]
 
-        if 'users.txt' in temp:
+        if 'users.txt' in str(temp):
             id = len(temp) # Debug this and the below line
-            print(id)
             temp1 = p1 / 'users.txt'
             user = f'[{id}, {name}]\n'
             with open(temp1,"a") as f:
                 f.write(user)
 
-        if 'users.txt' not in temp:
+        elif 'users.txt' not in str(temp):
             temp1 = p1 / 'users.txt'
             temp1.parent.mkdir(exist_ok=True,parents=True)
             temp1.touch(exist_ok=True)
@@ -29,7 +28,6 @@ class atlas:
                 f.write(user)
 
 
-        
         # Initiating user files
 
         p2 = p1 / f'user_{name}_{id}'
@@ -62,8 +60,4 @@ class atlas:
 
     def add_book(self, user_name, user_id, bookname=None, authorname=None):
         pass
-        
-# Test
-x = atlas()
-x.create_user("Arsalan")
 

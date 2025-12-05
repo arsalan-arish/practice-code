@@ -11,7 +11,8 @@
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
-            "stopOnLine": True
+            "justMyCode" : false
+            "stopOnEntry": true
             
         }
     ]
