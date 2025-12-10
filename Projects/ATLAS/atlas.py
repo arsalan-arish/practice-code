@@ -1,63 +1,57 @@
 from pathlib import Path
 from copy import deepcopy
+import json
 
 class atlas:
     
     def create_user(self, name):
 
-        # Iniiating the necessary files and folders if not present
+        # Initiating the necessary files and folders if not present in sourcePath, and writing the new user id & name in usersList
         name = name.lower()
-        p1 = Path.home() / 'database'
-        p1.mkdir(parents=True, exist_ok=True)
-        temp = [n for n in p1.iterdir()]
-
-        if 'users.txt' in str(temp):
-            id = len(temp) # Debug this and the below line
-            temp1 = p1 / 'users.txt'
-            user = f'[{id}, {name}]\n'
-            with open(temp1,"a") as f:
-                f.write(user)
-
-        elif 'users.txt' not in str(temp):
-            temp1 = p1 / 'users.txt'
-            temp1.parent.mkdir(exist_ok=True,parents=True)
-            temp1.touch(exist_ok=True)
-            id = len(temp)+1
-            user = f'[{id}, {name}]\n'
-            with open(temp1,"a") as f:
-                f.write(user)
+        sourcePath = Path.home() / 'database'
+        sourcePath.mkdir(exist_ok=True)
+        listOfExistingFilesAndFolders = [n for n in sourcePath.iterdir()]
+        usersList = sourcePath / 'users.txt'
+        if 'users.txt' in str(listOfExistingFilesAndFolders):
+            userID = len(listOfExistingFilesAndFolders)
+        else:
+            userID = len(listOfExistingFilesAndFolders)+1
+            usersList.touch()
+            
+        userData = f'[{userID}, {name}]\n'
+        if name in str(listOfExistingFilesAndFolders):
+            print(f'User {name} already exists! Please try with a different name')
+            return
+        usersList.write_text(userData)
 
 
         # Initiating user files
 
-        p2 = p1 / f'user_{name}_{id}'
-        p2.parent.mkdir(exist_ok=True, parents=True)
-        lst = ['books.py','notes.py','tasks.py','user_metadata.py','scripts']
+        userPath = sourcePath / f'user_{name}_{userID}'
+        userPath.mkdir()
+        items = ['books.json','notes.json','tasks.json','user_metadata.json','automationScripts']
 
-        for i in lst:
-            p3 = p2 / i
-            if i.__contains__('.'):
-                p3.parent.mkdir(exist_ok=True,parents=True)
-                p3.touch(exist_ok=True)
+        for item in items:
+            tempPath = userPath / item
+            if '.' in item:
+                tempPath.touch()
             else:
-                p3.mkdir(exist_ok=True)
+                tempPath.mkdir()
 
         metadata = {
-            'id'   : id,
+            'userID'   : userID,
             'name' : name,
             'preferences' :    {},
             'command_history': [],
             'search_history':  []
         }
         
-        p4 = p2 / 'user_metadata.py'
-        with open(p4,"w") as p4:
-            p4.write(str(metadata))
+        tempPath = userPath / 'user_metadata.json' # In items[3]
+        tempPath.write_text(str(metadata))
 
-        print(f"User registered successfully! See at {p2}")
-
+        print(f"User registered successfully! See at {userPath}")
 
 
-    def add_book(self, user_name, user_id, bookname=None, authorname=None):
+
+    def add_book(self, userName, userID, bookName, authorName='Not specified'):
         pass
-
