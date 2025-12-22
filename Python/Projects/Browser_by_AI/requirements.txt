@@ -1,0 +1,12 @@
+certifi==2025.10.5
+charset-normalizer==3.4.4
+idna==3.11
+pillow==10.4.0
+pyqt6==6.10.0
+pyqt6-qt6==6.10.0
+pyqt6-sip==13.10.2
+pyqt6-webengine==6.10.0
+pyqt6-webengine-qt6==6.10.0
+requests==2.32.5
+tkhtmlview==0.3.1
+urllib3==2.5.0
