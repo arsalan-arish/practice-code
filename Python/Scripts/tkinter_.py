@@ -76,6 +76,23 @@ Messagebox -->
     showinfo()
     askyesno()
 
+    
+
+    Parameter 	Description
+master	The parent container widget (e.g., the main window or a frame) where the button is placed.
+command	A function to be called when the button is clicked. The function name should be provided without parentheses (e.g., command=my_function).
+text	The text string displayed on the button.
+width	The width of the button in characters (for text) or pixels (for images).
+height	The height of the button in text lines (for text) or pixels (for images).
+bg or background	The normal background color of the button.
+fg or foreground	The normal foreground (text) color of the button.
+font	The font used for the button's text.
+state	Controls the button's interactivity; can be set to NORMAL (default) or DISABLED to gray it out and make it unresponsive.
+image	An image to be displayed on the button, instead of or alongside text.
+activebackground	The background color when the mouse cursor is over the button.
+bd or borderwidth	The width of the border in pixels (default is 2).
+padx, pady	Additional padding inside the button, horizontally and vertically.
+relief	Specifies the border appearance (e.g., SUNKEN, RAISED, GROOVE, RIDGE).
 """
 
 # Best tkinter format for non OOP
