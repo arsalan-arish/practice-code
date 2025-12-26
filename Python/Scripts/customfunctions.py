@@ -1,3 +1,4 @@
+# type: ignore
 def Mersenne_Twister_Algo_Tester_In_Random_Module():
     """
     This function will test the reliability of the random module's MersenneTwister Algorithm with respect 
@@ -6,30 +7,76 @@ def Mersenne_Twister_Algo_Tester_In_Random_Module():
     For example, if input is random.randint(1,100), will it truly give a random number or bias towards a 
     sequence. For more understanding, study the science of PRNGs. 
     """
-    from random import randint
-    n1 = 1
-    n2 = 100
-    span = 1000 # Larger span will result in more precise and accurate values as the avg will be based on solid results (How probability flattens with large number of samples)
     def func():
-        x = 0
-        y = randint(n1,n2)
-        x+=1
-        while y != 1: # 1 is not specific. Any number between 1 and 100 can be used
-            x+=1
+        from random import randint
+        n1 = 1
+        n2 = 100
+        span = 10 # Larger span will result in more precise and accurate values as the avg will be based on solid results (How probability flattens with large number of samples)
+        def func():
+            x = 0
             y = randint(n1,n2)
-        return x    
+            x+=1
+            while y != 1: # 1 is not specific. Any number between 1 and 100 can be used
+                x+=1
+                y = randint(n1,n2)
+            return x    
 
-    templist = []
-    for _ in range(span):
-        temp = func()
-        templist.append(temp)
+        templist = []
+        for _ in range(span):
+            temp = func()
+            templist.append(temp)
+
+        avgnumOfTimesTakenToFindn = sum(templist) / len(templist)
+        numOfTimesItShouldTake = abs(n1-n2)+1
+        temp_accuracy = 100-((abs(avgnumOfTimesTakenToFindn-numOfTimesItShouldTake)/numOfTimesItShouldTake)*100)
+        temp_accuracy = round(temp_accuracy)
+
+        return temp_accuracy
     
-    avgnumOfTimesTakenToFindn = sum(templist) / len(templist)
-    numOfTimesItShouldTake = abs(n1-n2)+1
-    accuracy = 100-((abs(avgnumOfTimesTakenToFindn-numOfTimesItShouldTake)/numOfTimesItShouldTake)*100)
-    accuracy = round(accuracy)
+    accuracy = []
+    for _ in range(100):
+        accuracy.append(func())
+    accuracy = sum(accuracy) / len(accuracy)
 
     return accuracy
 
-# Testing
-# print(f"Accuracy : {Mersenne_Twister_Algo_Tester_In_Random_Module()} %")
+
+
+def get_roots():
+    """ 
+    This function will return the roots of an OS (either Drive leters on windows or / on Posix) 
+    """
+    from pathlib import Path
+    from os import name
+
+    roots = []
+
+    if name == "nt":  # Windows
+        for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
+            drive = Path(f"{letter}:/")
+            if drive.exists():
+                roots.append(drive)
+    else:  # Unix-like systems
+        roots.append(Path("/"))
+
+    return roots
+
+
+
+def insertion_sort(Unsorted_List):
+    """
+    This function will take in an Unsorted_list and return it as sorted
+    """
+    temp = 0
+    x = len(Unsorted_List)
+    i = 1
+
+    for _ in range (x): # this loop will carry a round of checking all the elements
+        while(i < x): # this conditional block will check between two elements and swap if not in ascending order 
+            if (Unsorted_List[i]<Unsorted_List[i-1]): 
+                temp = Unsorted_List[i]
+                Unsorted_List[i] = Unsorted_List[i-1]
+                Unsorted_List[i-1] = temp
+            i+=1 
+
+    return Unsorted_List
