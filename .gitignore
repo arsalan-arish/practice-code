@@ -1,2 +1,3 @@
 /.vscode/
 /C-lang/**/*.exe
+__pycache__
