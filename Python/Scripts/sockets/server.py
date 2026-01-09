@@ -1,19 +1,30 @@
-import socket
+import socket 
+from threading import Thread, active_count
 
-server_socket = socket.socket()
-server_socket.bind(('localhost',3000))
-server_socket.listen(2)
+Local_IPAddress = socket.gethostbyname(socket.gethostname())
+PORT = 8080
+ADDR = (Local_IPAddress, PORT)
+MSG_BYTES = 20
 
-print("Server is listening on port 3000...")
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(ADDR)
 
-conn, addr = server_socket.accept()
-print(f"Connected with {addr}")
+def handle_client(conn, addr):
+    print(f"[NEW CONNECTION] {addr} connected")
+    connected = True
+    while KeyboardInterrupt:
+        msg = conn.recv(MSG_BYTES)
+        print(f"Client: {msg}")
+        _ = input()
+        conn.send(b"Message from server")
 
-while True:
-    data = conn.recv(1024).decode(encoding='utf-8')
-    if not data:
-        break
-    print("Client: ", data)
-    conn.send(f"Recieved {data}".encode(encoding='utf-8'))
+def start():
+    server.listen()
+    while True:
+        conn, addr = server.accept()
+        thread = Thread(target=handle_client, args=(conn, addr))
+        thread.start()
+        print(f"[ACTIVE CONECTIONS] {active_count() - 1}")
 
-conn.close()
+print(f"[STARTING] server at {ADDR}")
+start()
