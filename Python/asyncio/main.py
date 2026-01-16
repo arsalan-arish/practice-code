@@ -1,18 +1,14 @@
-import myasync
-#? import asyncio
+from myasync import event_loop
 
-def test():
-    print("-- Currently Inside function 'test'")
+def test1():
+    print("Starting coroutine test1()")
+
+def test2():
+    print("Starting coroutine test2()")
 
 def main():
-    print("Starting async function main()")
-    # Make the function wait for some time
-    yield ("wait", 3)
-    print("Successfully tested 'wait'")
-    yield ("function", test)
-    print("Successfully tested 'function'")
-    print("Ending async function main()")
-    return 0 # Success
+    print("Starting coroutine main()")
 
-print(myasync.run(main()))
 
+loop = event_loop()
+loop.run(main())
