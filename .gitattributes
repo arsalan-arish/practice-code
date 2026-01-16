@@ -1,2 +1,2 @@
 *.tldr linguist-generated=true -diff
-* text eol=lf
+* text=auto eol=lf
