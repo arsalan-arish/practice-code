@@ -1,0 +1,43 @@
+[project]
+name = "matrixfunctions"
+version = "1.0.0"
+description = "A short description of your CLI tool"
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+license-files = ["LICENSE*"]
+authors = [
+  { name="Your Name", email="your@email.com" },
+]
+maintainers = [
+  { name="Your Name", email="your@email.com" },
+]
+# dependencies = [
+#     "click >= 8.0.0",
+#     "gidgethub[httpx]",
+#     "django>2.1; os_name != 'nt' ",
+#     "django>2.0; os_name == 'nt' "
+# ]
+# keywords = ["matrix", "math"]
+
+# [project.scripts]
+# your-cli-command = "your_package_name.<filepath>:<entrypoint>"
+
+
+# [project.urls]
+# Repository = "https://github.com/<path>"
+
+
+[build-system]
+requires = ["uv_build>=0.9.0"]
+build-backend = "uv_build"
+
+
+ [tool.uv.build-backend]
+ module-root = "src"
+ module-name = "matrixfunctions"
+
+
+# [project.optional-dependencies]
+# gui = []
+# cli = []
