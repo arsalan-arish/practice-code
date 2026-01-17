@@ -1,7 +1,8 @@
 import requests
 import json
+import os
 
-APP_KEY = "c0f327b7fbea47ee9e387491e32d9016"
+APP_KEY = os.getenv()
 
 params = {
     "app_key": APP_KEY
