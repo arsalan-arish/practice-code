@@ -1,8 +1,11 @@
 import requests
 import json
 import os
+from dotenv import load_dotenv
 
-APP_KEY = os.getenv()
+load_dotenv('.env')
+
+APP_KEY = os.getenv('APP_KEY')
 
 params = {
     "app_key": APP_KEY

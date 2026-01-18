@@ -1,0 +1,105 @@
+🚫 Hard Rules (No Escaping)
+
+Pure JSON only
+- No comments
+- No trailing commas
+- No functions
+- No $ref shortcut
+- Must be serializable
+- Must be normalized but practical
+- IDs must be globally unique strings
+- Dates must be ISO-8601 strings
+- Booleans must be real booleans
+- Numbers must reflect real meaning (no magic strings)
+
+
+🧠 What You Must Model
+
+1️⃣ Users (Hard Part)
+
+Each user:
+- Has multiple roles (student, teacher, admin, seller)
+- Can be soft-deleted
+- Has audit history
+- Supports multiple auth providers
+- Has preferences per locale
+- Has account status transitions
+
+Constraints
+- Email is unique
+- Username is immutable
+- One user can own multiple organizations
+
+
+2️⃣ Organizations
+
+Each organization:
+- Has owners and members
+- Has permission levels
+- Has billing info
+- Can be suspended
+- Has internal metadata
+- Supports multi-currency
+
+
+3️⃣ Courses (Education)
+
+Each course:
+- Belongs to an organization
+- Has versions (v1, v2…)
+- Has modules → lessons → content blocks
+- Supports text, video, quiz blocks
+- Has enrollment rules
+- Has pricing tiers
+- Has localized titles/descriptions
+
+
+4️⃣ Products (Commerce)
+
+Products:
+- Can be physical or digital
+- Can be bundled
+- Can be linked to courses
+- Have inventory (or infinite for digital)
+- Have price history
+- Have tax rules per country
+
+
+5️⃣ Orders & Payments
+
+Orders:
+- Belong to users
+- Support multiple products
+- Have partial refunds
+- Have payment attempts
+- Track failures
+- Support multiple gateways
+
+
+6️⃣ Permissions System (Very Hard)
+
+You must model:
+- Role-based permissions
+- Resource-level overrides
+- Time-limited access
+- Explicit deny rules
+
+
+7️⃣ Auditing & Logs
+
+Every major entity must:
+- Track created_by, updated_by
+- Track created_at, updated_at
+- Track historical changes
+- Track reason for change
+
+
+8️⃣ Internationalization (i18n)
+
+You must:
+- Support multiple languages
+- Support fallback
+- Store locale-specific data cleanly
+
+
+https://chatgpt.com/c/696d025a-7090-8322-a12d-0fbf9a822345
