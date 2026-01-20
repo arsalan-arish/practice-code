@@ -1,13 +1,16 @@
 import socket
 
-MSG_BYTES = 20
-Local_IPAddress = socket.gethostbyname(socket.gethostname())
 PORT = 8080
+LOCALIP = socket.gethostbyname(socket.gethostname())
+ADDR = (LOCALIP, PORT)
 
-client = socket.socket()
-client.connect((Local_IPAddress, PORT))
-while KeyboardInterrupt:
-    _ = input()
-    client.send(b'Message from client')
-    msg = client.recv(MSG_BYTES)
-    print(f"Server: {msg}")
+s = socket.socket()
+s.connect(ADDR)
+
+
+s.send(b"Hello from client")
+while KeyboardInterrupt: 
+    r = s.recv(100).decode()
+    print(r)
+    x = input()
+    s.send("Hello from client".encode())
