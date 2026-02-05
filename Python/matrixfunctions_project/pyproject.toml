@@ -15,13 +15,14 @@ maintainers = [
 # dependencies = [
 #     "click >= 8.0.0",
 #     "gidgethub[httpx]",
-#     "django>2.1; os_name != 'nt' ",
+#     "django>2.1,<=3.0; os_name != 'nt' ",
 #     "django>2.0; os_name == 'nt' "
 # ]
 # keywords = ["matrix", "math"]
 
 # [project.scripts]
 # your-cli-command = "your_package_name.<filepath>:<entrypoint>"
+# turtlelab = "turtlelab.core:main"
 
 
 # [project.urls]
@@ -33,11 +34,11 @@ requires = ["uv_build>=0.9.0"]
 build-backend = "uv_build"
 
 
- [tool.uv.build-backend]
- module-root = "src"
- module-name = "matrixfunctions"
+[tool.uv.build-backend]
+module-root = "src"
+module-name = "matrixfunctions"
 
 
 # [project.optional-dependencies]
-# gui = []
-# cli = []
+# gui = [] only installed when pip install packagename[gui]
+# cli = [] only installed when pip install packagename[cli]

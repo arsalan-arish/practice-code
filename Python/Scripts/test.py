@@ -136,3 +136,35 @@
 
 # for attr in x:
 #     print(attr)
+
+import time
+import functools
+
+# Decorate the function with @functools.cache
+@functools.cache
+def fibonacci(n):
+    """
+    Calculates the nth Fibonacci number efficiently using caching.
+    """
+    if n < 2:
+        return n
+    # The recursive calls are also cached automatically
+    return fibonacci(n - 2) + fibonacci(n - 1)
+
+# Example Usage
+print("Starting calculations...")
+
+start_time = time.perf_counter()
+result_1 = fibonacci(500)
+end_time = time.perf_counter()
+print(f"First call (fib(35)): {result_1}, Time taken: {end_time - start_time} seconds")
+
+start_time = time.perf_counter()
+result_2 = fibonacci(500)
+end_time = time.perf_counter()
+print(f"Second call (fib(35)): {result_2}, Time taken: {end_time - start_time} seconds")
+
+# start_time = time.perf_counter()
+# result_3 = fibonacci(40) # A new, larger number
+# end_time = time.perf_counter()
+# print(f"Third call (fib(40)): {result_3}, Time taken: {end_time - start_time} seconds")
