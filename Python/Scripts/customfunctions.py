@@ -112,3 +112,19 @@ def diamond(n : int, fill : bool):
           else:
             print(" ",end="")
       print()
+
+
+def loadingBar():
+    import time
+    import sys
+    # A simple loading bar using \r
+    for i in range(21):
+        # \r moves the cursor back to the start of the line
+        # end='' prevents the print function from adding a new line (\n)
+        print(f"\rLoading: [{'#' * i}{'.' * (20 - i)}] {i*5}%", end="")
+        
+        # Flush ensures the text appears immediately in the terminal
+        sys.stdout.flush() 
+        time.sleep(0.1)
+
+    print("\nDone!")
